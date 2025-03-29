@@ -3,7 +3,7 @@ using UnityEngine;
 namespace RebelHavoc
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : Subject
     {
         [SerializeField] private InputReader input;
         [SerializeField] private Rigidbody rb;
