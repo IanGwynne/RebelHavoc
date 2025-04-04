@@ -1,40 +1,27 @@
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+namespace Platformer397
 {
-    public static GameManager Instance { get; private set; }
-    [SerializeField] private GameObject pauseMenuCanvas;
-
-    private bool isPaused = false;
-
-    private void Awake()
+    public class GameMannager : Singleton<GameMannager>
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+       private Transform player;
 
-    public void TogglePause()
-    {
-        isPaused = !isPaused;
-        Time.timeScale = isPaused ? 0 : 1;
-        pauseMenuCanvas.SetActive(isPaused); 
+       private void Start()
+       {
+           player = GameObject.FindGameObjectWithTag("Player").transform;
+       }
 
-        if (isPaused)
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true; 
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false; 
-        }
+       public void SaveGame()
+       {
+           SaveGameManager.Instance().SaveGame(player);
+       }
+
+       public void LoadGame()
+       {
+           PlayerData data = SaveGameManager.Instance().LoadGame();
+           if (data == null) {return;}
+           var position = JsonUtility.FromJson<Vector3>(data.position);
+           player.position = position;
+       }
     }
 }
