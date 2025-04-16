@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Platformer397
+namespace RebelHavoc
 {
     public class GameMannager : Singleton<GameMannager>
     {

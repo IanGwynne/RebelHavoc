@@ -2,7 +2,7 @@ using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace Platformer397
+namespace RebelHavoc
 {
     [System.Serializable]
     public class PlayerData

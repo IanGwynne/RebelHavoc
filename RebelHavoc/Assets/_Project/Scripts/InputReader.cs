@@ -13,6 +13,11 @@ namespace RebelHavoc
         public event UnityAction Attack = delegate { };
         public event UnityAction Pause = delegate { };
 
+
+        [SerializeField] private VirtualJoystick joystick;
+
+
+
         InputSystem_Actions input;
 		private void OnEnable()
 		{

@@ -55,6 +55,7 @@ namespace RebelHavoc
             UpdateMovement();
         }
 
+
         private void UpdateMovement()
         {
             var adjustedDirection = Quaternion.AngleAxis(mainCam.eulerAngles.y, Vector3.up) * movement;
