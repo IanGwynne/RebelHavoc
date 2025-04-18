@@ -19,11 +19,10 @@ namespace RebelHavoc
         [Tooltip("Speed of rotation of the player")]
         [SerializeField] private float rotationSpeed = 200f;
         [SerializeField] private float jumpForce = 10f;
-        [SerializeField] private LayerMask groundLayer; 
+        [SerializeField] private LayerMask groundLayer;
 
-        private int jumpCount = 0; 
-        private const int maxJumps = 1; 
-
+        private int jumpCount = 0;
+        private const int maxJumps = 1;
 
         [SerializeField] private Transform mainCam;
 
@@ -60,11 +59,9 @@ namespace RebelHavoc
             UpdateMovement();
         }
 
-
-
-
         private void UpdateMovement()
         {
+
             var adjustedDirection = Quaternion.AngleAxis(mainCam.eulerAngles.y, Vector3.up) * movement;
             if (adjustedDirection.magnitude > 0f)
             {
@@ -74,24 +71,28 @@ namespace RebelHavoc
             }
             else
             {
-                // not change the rotation or movement, but need to apply rigidbody Y movement for gravity
+                // Apply rigidbody Y movement for gravity
                 rb.linearVelocity = new Vector3(0f, rb.linearVelocity.y, 0f);
             }
+
             if (IsGrounded())
             {
                 jumpCount = 0;
             }
         }
+
         private void HandleMovement(Vector3 adjustedMovement)
         {
             var velocity = adjustedMovement * moveSpeed * Time.fixedDeltaTime;
             rb.linearVelocity = new Vector3(velocity.x, rb.linearVelocity.y, velocity.z);
         }
+
         private void HandleRotation(Vector3 adjustedMovement)
         {
             var targetRotation = Quaternion.LookRotation(adjustedMovement);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
+
         private void GetMovement(Vector2 move)
         {
             movement.x = move.x;
@@ -122,6 +123,11 @@ namespace RebelHavoc
         private bool IsGrounded()
         {
             return Physics.Raycast(transform.position, Vector3.down, 1.1f, groundLayer);
+        }
+
+        public void OnJumpButtonPressed()
+        {
+            HandleJump();
         }
     }
 }
