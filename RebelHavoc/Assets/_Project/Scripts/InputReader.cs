@@ -9,6 +9,7 @@ namespace RebelHavoc
     public class InputReader : ScriptableObject, IPlayerActions
     {
 		public event UnityAction<Vector2> Move = delegate {};
+		public event UnityAction<bool> Interact = delegate {};
         public event UnityAction Jump = delegate { };
         public event UnityAction Attack = delegate { };
         public event UnityAction Pause = delegate { };
@@ -70,7 +71,16 @@ namespace RebelHavoc
         }
 
         public void OnLook(InputAction.CallbackContext context){}
-		public void OnInteract(InputAction.CallbackContext context){}
+		public void OnInteract(InputAction.CallbackContext context)
+		{
+			switch(context.phase)
+			{
+				case InputActionPhase.Started:
+				    Interact?.Invoke(true);
+				break;
+			}
+		}
+
 		public void OnCrouch(InputAction.CallbackContext context){}
 		public void OnPrevious(InputAction.CallbackContext context){}
 		public void OnNext(InputAction.CallbackContext context){}

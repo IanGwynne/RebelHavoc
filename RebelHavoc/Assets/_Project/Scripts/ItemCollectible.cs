@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Platformer397
 {
-    public class ItemCollectable : MonoBehaviour
+    public class ItemCollectible : MonoBehaviour
     {
         public ItemBase item;
     }

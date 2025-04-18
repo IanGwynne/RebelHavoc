@@ -28,5 +28,6 @@ namespace Platformer397
         {
             items.Remove(item);
         }
+
     }
 }

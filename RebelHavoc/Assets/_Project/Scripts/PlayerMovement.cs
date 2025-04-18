@@ -5,13 +5,18 @@ namespace RebelHavoc
     [RequireComponent(typeof(Rigidbody))]
     public class PlayerController : Subject
     {
+        [Header("Inputs")]
         [SerializeField] private InputReader input;
+        [Tooltip("Variable reference to the Rigidbody of the player to be assigned")]
         [SerializeField] private Rigidbody rb;
         [SerializeField] private GameObject projectilePrefab; // projectile prefab
         [SerializeField] private Transform shootPoint; // where the projectile will be shot
         private Vector3 movement;
 
+        [Header("Stats")]
+        [Tooltip("Speed of Movement of the player")]
         [SerializeField] private float moveSpeed = 200f;
+        [Tooltip("Speed of rotation of the player")]
         [SerializeField] private float rotationSpeed = 200f;
         [SerializeField] private float jumpForce = 10f;
         [SerializeField] private LayerMask groundLayer; 
@@ -56,6 +61,8 @@ namespace RebelHavoc
         }
 
 
+
+
         private void UpdateMovement()
         {
             var adjustedDirection = Quaternion.AngleAxis(mainCam.eulerAngles.y, Vector3.up) * movement;
@@ -90,6 +97,8 @@ namespace RebelHavoc
             movement.x = move.x;
             movement.z = move.y;
         }
+
+        
 
         private void HandleJump()
         {
